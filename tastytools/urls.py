@@ -1,6 +1,8 @@
 from django.conf.urls import patterns, include, url
+from django.contrib.auth.decorators import user_passes_test
 from .views import doc
 
+
 urlpatterns = patterns('',
-    (r'^', doc),
+    (r'^', user_passes_test(lambda u: u.is_superuser)(doc)),
 )
